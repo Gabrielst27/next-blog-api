@@ -1,9 +1,11 @@
 import { validateSync } from 'class-validator';
 
+export type FieldsErrors = {
+  [field: string]: string[];
+};
+
 export class ClassValidator<Rules> {
-  errors: {
-    [field: string]: string[];
-  };
+  errors: FieldsErrors;
   validData: Rules;
 
   validate(data: any): boolean {
