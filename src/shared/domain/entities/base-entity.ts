@@ -1,16 +1,18 @@
 import { v4 } from 'uuid';
 
-export type BaseEntityProps = {
-  createdAt: Date;
-  updatedAt: Date;
+export type BaseProps = {
+  createdAt?: Date;
+  updatedAt?: Date;
 };
 
-export abstract class BaseEntity<Props extends BaseEntityProps> {
+export abstract class BaseEntity<Props extends BaseProps> {
   private readonly _id: string;
   private readonly _props: Props;
 
   constructor({ ...props }: Props, id?: string) {
     this._id = id || v4();
+    props.createdAt = props.createdAt || new Date();
+    props.updatedAt = props.updatedAt || new Date();
     this._props = props;
   }
 
